@@ -3,19 +3,21 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import DevTools from './devTools';
-import { getCountries } from './actions/actions-countries';
+import { Router,  hashHistory} from 'react-router';
+import routes from './routes';
+
 
 render(
     <Provider store={store}>
-        <div>
-            <h1>Initialize the project</h1>
-            <DevTools />
-        </div>    
+      <Router history={hashHistory} routes={routes}>
+      
+      </Router>
+
     </Provider>,
      document.getElementById('root')
   
 ) 
-store.dispatch(getCountries())
+
 
 
 
