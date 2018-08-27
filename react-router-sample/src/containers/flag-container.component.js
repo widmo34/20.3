@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CountryFlagList from  '../presentational/flag-list.component';
-import { getCountries } from '../actions/actions-countries';
+
 
 class CountryFlagContainer extends Component{
     constructor(props){
@@ -20,7 +20,7 @@ class CountryFlagContainer extends Component{
 }
 
 const mapStateToProps = function (store){
-        // console.log(store);
+         console.log(store);
     return{
           countries: store.countriesReducer.countries
     };
