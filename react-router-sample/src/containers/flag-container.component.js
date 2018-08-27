@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CountryFlagList from  '../presentational/flag-list.component';
+import { searchCountries, getCountries } from '../actions/actions-countries';
 
 
 class CountryFlagContainer extends Component{
@@ -8,22 +9,35 @@ class CountryFlagContainer extends Component{
         super(props);
     }
 
-  
+    componentDidMount(){
+        this.props.dispatch(getCountries());
+        this.props.dispatch(searchCountries(''));
+    }
+
+    search(event){
+        this.props.dispatch(searchCountries(event.target.value));
+    }
+ 
 
     render(){
         return(
             <div>
-                <CountryFlagList countries={this.props.countries} />
+                <div>
+                    <input type="text" onChange={this.search.bind(this)} />
+                </div>
+                <CountryFlagList countries={this.props.visibleCountries} />
             </div>
         )
     }
 }
 
 const mapStateToProps = function (store){
-         console.log(store);
+       //  console.log(store);
     return{
-          countries: store.countriesReducer.countries
+          countries: store.countriesReducer.countries,
+          visibleCountries: store.countriesReducer.visibleCountries
     };
 };
 
 export default connect(mapStateToProps)(CountryFlagContainer);
+
